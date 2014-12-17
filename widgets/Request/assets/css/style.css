@@ -1,30 +1,24 @@
-.request-btn,
-.request-btn:hover{
-
+.modal{
+	
 }
 
-.request-btn:hover{
+.request-btn,
+.request-btn:hover,
+.request-btn:focus,
+form[id*='request'] button[class*="span"],
+form[id*='request'] button[class*="span"]:focus{
+	
+}
 
+form[id*='request'] button[class*="span"],
+form[id*='request'] button[class*="span"]:focus{
+	margin-left: 0 !important;
 }
 
 #request .modal-body{
-	max-height: 1080px;
+	
 }
-
-#request-form button{
-	margin-left: 0;
-}
-
-#request .error{
-	font-size: 12px;
-	line-height: 14px;
-}	
 
 #success{
-	display: none;
-}
-
-
-.hide-non-js{
 	display: none;
 }

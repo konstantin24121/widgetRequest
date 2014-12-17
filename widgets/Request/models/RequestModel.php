@@ -14,6 +14,9 @@ class RequestModel extends CFormModel{
 	public $qaptcha;
 	public $verifyCode;
 
+	/*your var@attributes*/
+
+
 	public function rules(){	
 		return $this->rules;
 	}
@@ -107,6 +110,8 @@ class RequestModel extends CFormModel{
 				array('qaptcha','qaptchaVerify'),
 			);
 	}
+
+	/*Write your rules here*/
 
 }
 

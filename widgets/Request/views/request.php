@@ -7,8 +7,14 @@
 
 		case 'block':
 			$this->render('_form',array('model'=>$model,'body'=>$body));
+			break;
+
+		case 'button':
+			$this->widget('bootstrap.widgets.TbButton',$this->optionsButton);
 			break;	
-		
+			
+		/*Write your type here*/
+
 		default:
 			echo '<div class="alert alert-error">
 					<h5>Кто к нам с чем и зачем, тот от того и того.</h5>

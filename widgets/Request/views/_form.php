@@ -14,8 +14,6 @@ $reset = $this->optionsForm['reset'] ? 'setTimeout(function(){
 $form = $this->beginWidget("TbActiveForm",array(
   'id'=> $this->optionsForm['id'],
   'type'=>$this->optionsForm['type'],
-  //'action'=> $this->optionsForm['ajax'] ? $this->optionsForm['action']:'',
-  //'enableAjaxValidation'=>$this->optionsForm['ajax'],
   'enableClientValidation'=>true,
   'htmlOptions'=>$this->optionsForm['htmlOptions'],
   'clientOptions'=>$this->optionsForm['ajax'] ? array(
@@ -65,7 +63,7 @@ $this->widget('bootstrap.widgets.TbButton', array(
               'type'=>'info',
               'label'=>'Отправить',
               'htmlOptions'=>array(
-                'class'=>'span12',
+                'class'=>'span6 offset3',
               )
           ));
 echo '</div>';

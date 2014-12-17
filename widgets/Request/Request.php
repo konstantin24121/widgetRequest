@@ -2,17 +2,18 @@
 
 class Request extends XPortlet{
 
-	private $assets;
-	private $clientPos;
-	private $htmlOptionsDefault = array(
+	/*Parametrs*/
+	private $assets;  //путь до папкси с ресурсами
+	private $clientPos; //позиция подключения Js-скриптов
+	private $htmlOptionsDefault = array( //настройки кнопки подъема модального окна по дефолту
           'data-toggle'=>'modal',
           'data-target'=>'#request',
           'class'=>''
         );
-	private $body; 
+	private $body; //собираемое тело формы
 
-	public $type = 'modal';
-	public $cssFile = 'style.css';
+	public $type = 'modal'; 
+	public $cssFile = 'style.css'; 
 	public $title = 'Заявка на обратный звонок';
 	public $template = '{name}{email}{phone}{text}{captcha}';
 	public $mailText = '_text';
@@ -43,12 +44,13 @@ class Request extends XPortlet{
 	public function setupVariable(){
 		$this->optionsButton['type'] = isset($this->optionsButton['type'])? $this->optionsButton['type'] : 'link';
 		$this->optionsButton['label'] = isset($this->optionsButton['label'])? $this->optionsButton['label'] : 'Оставить заявку';
-		$this->optionsButton['url'] = isset($this->optionsButton['url'])? $this->optionsButton['url'] : CHtml::normalizeUrl(array('site/request'));
+		$this->optionsButton['url'] = isset($this->optionsButton['url'])? $this->optionsButton['url'] : CHtml::normalizeUrl(array($this->controller->getUniqueId().'/request'));
 		$this->optionsButton['htmlOptions'] = isset($this->optionsButton['htmlOptions'])? $this->optionsButton['htmlOptions'] : $this->htmlOptionsDefault;
 		
 		$this->optionsForm['type'] = isset($this->optionsForm['type'])? $this->optionsForm['type'] : 'horizontal';
 		$this->optionsForm['id'] = isset($this->optionsForm['id'])? $this->optionsForm['id'] : 'request-form';
-		$this->optionsForm['action'] = isset($this->optionsForm['action'])? $this->optionsForm['action'] : CHtml::normalizeUrl(array('site/request'));
+		$this->optionsForm['action'] = isset($this->optionsForm['action'])? $this->optionsForm['action'] : $this->optionsButton['url'];
+		$this->optionsForm['actionCaptcha'] = isset($this->optionsForm['actionCaptcha'])? $this->optionsForm['actionCaptcha'] : CHtml::normalizeUrl(array($this->controller->getUniqueId().'/captcha'));
 		$this->optionsForm['ajax'] = isset($this->optionsForm['ajax'])? $this->optionsForm['ajax'] : true;
 		$this->optionsForm['reset'] = isset($this->optionsForm['reset'])? $this->optionsForm['reset'] : true;
 		$this->optionsForm['serviceList'] = isset($this->optionsForm['serviceList'])? $this->optionsForm['serviceList'] : array();
@@ -116,7 +118,8 @@ class Request extends XPortlet{
  		return 'echo "<div class=\'row-fluid\'>".$form->captchaRow($model,"verifyCode",array(
 		    			"class"=>"span12",
 		    			"captchaOptions"=>array(
-		        			"buttonLabel"=>"<i class=\'icon-refresh\'></i>"
+		        			"buttonLabel"=>"<i class=\'icon-refresh\'></i>",
+		        			//"captchaAction"=>$this->optionsForm["actionCaptcha"]
 		        		)
 		    		)
 		  		)."</div>";';
@@ -130,8 +133,8 @@ class Request extends XPortlet{
 	public function send($model,$view = '_text'){
 	       		$txt_message = $this->render('mail/'.$view,array('model'=>$model),true,false);
 	       		$headers = 'From:'.Yii::app()->params['adminEmail']."\r\n".
-							    'Content-type: text/html'."\r\n".
-							    'charset=windows-1251'."\r\n".
+							    'Content-type: text/html;'.
+							    'charset=utf-8'."\r\n".
 							    'X-Mailer: PHP/' . phpversion();
 	       		$result = mail(
 	                	Yii::app()->params['emailString'],
@@ -151,8 +154,8 @@ class Request extends XPortlet{
 
 		if(isset($_POST['RequestModel'])){
 			$model->attributes=$_POST['RequestModel'];
-			$valid=$model->validate();
-			if($valid)
+			$valid = $model->validate();
+			if($valid){
 				$result = $this->send($model, $_POST['mailView']);
 				if(Yii::app()->request->isAjaxRequest){
 					$data["result"] = $result;
@@ -163,6 +166,7 @@ class Request extends XPortlet{
 						Yii::app()->user->setFlash($this->optionsForm['id'],$this->successMessage);
 					}
 				}
+			}
 		}
 	}
 
@@ -170,7 +174,6 @@ class Request extends XPortlet{
 		$model = new RequestModel;
 		$temp = isset($_POST['template'])?$_POST['template']:$this->template;
 		$model->setRules($temp); 
-
 		$this->validate($model);
 			
 		if(!Yii::app()->request->isAjaxRequest){

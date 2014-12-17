@@ -1,4 +1,4 @@
-Заказ на обратный звонок с сайта <?php echo $_SERVER['HTTP_HOST'];?>:<br /><br />
+Заказ на обратный звонок с сайта <?php echo Yii::app()->params['siteName'];?>:<br /><br />
 <strong>Контактная информация</strong><br />
 Имя - <?php echo $model->attributes['name']?><br />
 Телефон - <?php echo $model->attributes['phone']?><br />
