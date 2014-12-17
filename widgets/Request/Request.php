@@ -19,7 +19,6 @@ class Request extends XPortlet{
 	public $mailText = '_text';
 	public $successMessage = 'Мы вскоре свяжемся с Вами!';
 	public $errorMessage = 'Произашла ошибка отправки, попробуйте еще раз';
-	public $optionsWidget = array();
 	public $optionsButton = array();
     public $optionsForm = array();   
 	
@@ -44,12 +43,12 @@ class Request extends XPortlet{
 	public function setupVariable(){
 		$this->optionsButton['type'] = isset($this->optionsButton['type'])? $this->optionsButton['type'] : 'link';
 		$this->optionsButton['label'] = isset($this->optionsButton['label'])? $this->optionsButton['label'] : 'Оставить заявку';
-		$this->optionsButton['url'] = isset($this->optionsButton['url'])? $this->optionsButton['url'] : CHtml::normalizeUrl(array($this->controller->getUniqueId().'/request'));
+		$this->optionsButton['url'] = isset($this->optionsButton['url'])? $this->optionsButton['url'] : CHtml::normalizeUrl(array('site/request'));
 		$this->optionsButton['htmlOptions'] = isset($this->optionsButton['htmlOptions'])? $this->optionsButton['htmlOptions'] : $this->htmlOptionsDefault;
 		
 		$this->optionsForm['type'] = isset($this->optionsForm['type'])? $this->optionsForm['type'] : 'horizontal';
 		$this->optionsForm['id'] = isset($this->optionsForm['id'])? $this->optionsForm['id'] : 'request-form';
-		$this->optionsForm['action'] = isset($this->optionsForm['action'])? $this->optionsForm['action'] : $this->optionsButton['url'];
+		$this->optionsForm['action'] = isset($this->optionsForm['action'])? $this->optionsForm['action'] : CHtml::normalizeUrl(array($this->controller->getUniqueId().'/request'));;
 		$this->optionsForm['actionCaptcha'] = isset($this->optionsForm['actionCaptcha'])? $this->optionsForm['actionCaptcha'] : CHtml::normalizeUrl(array($this->controller->getUniqueId().'/captcha'));
 		$this->optionsForm['ajax'] = isset($this->optionsForm['ajax'])? $this->optionsForm['ajax'] : true;
 		$this->optionsForm['reset'] = isset($this->optionsForm['reset'])? $this->optionsForm['reset'] : true;
