@@ -6,7 +6,7 @@ widgetRequest
 ######Опции######
 Widget attribute |Type| Description|Default value|
 ------------- |------| -------------|-------|
-type  |*string*| тип модального окна |*modal,block,button*| 
+type  |*string*| тип модального окна. доступно *modal*,*block*,*buttom* |*modal*| 
 сssFile  |*string*| имя подключаемого файла стилей, помещаются в папку assets |*style.css*|
 title |*string*|заголовок виджета|*Заявка на обратный звонок*|
 template  |*string*| шаблон формы |*{name}{email}{phone}{text}{captcha}*|
@@ -37,3 +37,20 @@ serviceList |*array(key=>value)*|список значений для поля �
 prevText |*string*|текст вставляемый перед формой|*null*|
 afterText |*string*|текст вставляемый после формы|*null*|
 htmlOptions |*array()*| see htmlOptions Bootstrap|*array()*|
+
+######Доступные template######
++name
++phone
++phoneMasked
++email
++text
++service
++captcha
++qaptcha
+
+######Структура assest######
++css - файлы стилей
++img - изображения
++js - js-файлы
++plugins - плагины
+

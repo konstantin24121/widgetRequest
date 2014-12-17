@@ -13,7 +13,11 @@
 			$this->widget('bootstrap.widgets.TbButton',$this->optionsButton);
 			break;	
 			
-		/*Write your type here*/
+		/*Write your type here
+		case '@type':
+			@php;
+			break;
+		*/
 
 		default:
 			echo '<div class="alert alert-error">

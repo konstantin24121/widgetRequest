@@ -129,6 +129,12 @@ class Request extends XPortlet{
 		echo $form->hiddenField($model,"qaptcha");';
 	}
 
+	/*Write your formField there
+		public function render$NameTemplate$(){
+	 		return '@php';
+		}
+	*/
+
 	public function send($model,$view = '_text'){
 	       		$txt_message = $this->render('mail/'.$view,array('model'=>$model),true,false);
 	       		$headers = 'From:'.Yii::app()->params['adminEmail']."\r\n".
