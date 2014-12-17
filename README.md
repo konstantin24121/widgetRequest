@@ -39,18 +39,18 @@ afterText |*string*|текст вставляемый после формы|*nul
 htmlOptions |*array()*| see htmlOptions Bootstrap|*array()*|
 
 ######Доступные template######
-+name
-+phone
-+phoneMasked
-+email
-+text
-+service
-+captcha
-+qaptcha
++ name
++ phone
++ phoneMasked
++ email
++ text
++ service
++ captcha
++ qaptcha
 
 ######Структура assest######
-+css - файлы стилей
-+img - изображения
-+js - js-файлы
-+plugins - плагины
++ css - файлы стилей
++ img - изображения
++ js - js-файлы
++ plugins - плагины
 
