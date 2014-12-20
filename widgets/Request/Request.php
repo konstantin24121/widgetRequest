@@ -17,6 +17,7 @@ class Request extends XPortlet{
 	public $title = 'Заявка на обратный звонок';
 	public $template = '{name}{email}{phone}{text}{captcha}';
 	public $mailText = '_text';
+	public $renderFormAfterSuccess = true;
 	public $successMessage = 'Мы вскоре свяжемся с Вами!';
 	public $errorMessage = 'Произашла ошибка отправки, попробуйте еще раз';
 	public $optionsButton = array();
