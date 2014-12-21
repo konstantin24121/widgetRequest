@@ -1,6 +1,6 @@
 
 <?php
-echo ($this->type == 'block' && $this->renderFormAfterSuccess && Yii::app()->user->hasFlash($this->optionsForm['id'])) ? '<h2>'.$this->title.'</h2>' : '';
+echo ($this->type == 'block' && !$this->renderFormAfterSuccess || Yii::app()->user->hasFlash($this->optionsForm['id']))) ? '<h2>'.$this->title.'</h2>' : '';
 
 $reset = $this->optionsForm['reset'] ? 'setTimeout(function(){
                     $("#'.$this->optionsForm['id'].'").trigger("reset");
@@ -46,7 +46,7 @@ $form = $this->beginWidget("TbActiveForm",array(
       }'
     ):'',
 ));
-if($this->renderFormAfterSuccess && Yii::app()->user->hasFlash($this->optionsForm['id'])){
+if(!$this->renderFormAfterSuccess || Yii::app()->user->hasFlash($this->optionsForm['id']))){
   if($this->optionsForm['ajax'])
   echo "<script>$('#".$this->optionsForm['id']."').attr('action','".$this->optionsForm['action']."');</script>";
 
